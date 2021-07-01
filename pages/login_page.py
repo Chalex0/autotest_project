@@ -3,19 +3,32 @@ from .locators import LoginPageLocators
 
 
 class LoginPage(BasePage):
+    def __init__(self, browser):
+        super().__init__(browser, LoginPageLocators.LOGIN_URL)
+
     def should_be_login_page(self):
         self.should_be_login_url()
         self.should_be_login_form()
         self.should_be_register_form()
 
     def should_be_login_url(self):
-        # реализуйте проверку на корректный url адрес
-        assert ('login' in self.browser.current_url), f" 'login' is not present in URL {self.browser.current_url}"
+        # Проверка на корректный url адрес
+        assert ('login' in self.browser.current_url), f" 'login' is not presented in URL {self.browser.current_url}"
 
     def should_be_login_form(self):
-        # реализуйте проверку, что есть форма логина
+        # Проверка, что есть форма логина
         assert self.is_element_present(*LoginPageLocators.LOGIN_FORM), "LOGIN_FORM is not presented"
 
     def should_be_register_form(self):
-        # реализуйте проверку, что есть форма регистрации на странице
+        # Проверка, что есть форма регистрации на странице
          assert self.is_element_present(*LoginPageLocators.REGISTER_FORM), "REGISTER_FORM is not presented"
+
+    def register_new_user(self, email, password):
+        # Регистрация пользователя
+        waite_time = 5
+        self.this_element(*LoginPageLocators.REGISTER_EMAIL_FIELD, waite_time).send_keys(email)
+        self.this_element(*LoginPageLocators.REGISTER_PASSWORD_FIELD, waite_time).send_keys(password)
+        self.this_element(*LoginPageLocators.REGISTER_PASSWORD_CONFIRM_FIELD, waite_time).send_keys(password)
+        self.this_element(*LoginPageLocators.REGISTER_SUBMIT_BUTTON, waite_time).click()
+        self.should_be_authorized_user()
+
