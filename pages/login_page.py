@@ -3,8 +3,6 @@ from .locators import LoginPageLocators
 
 
 class LoginPage(BasePage):
-    def __init__(self, browser):
-        super().__init__(browser, LoginPageLocators.LOGIN_URL)
 
     def should_be_login_page(self):
         self.should_be_login_url()
@@ -25,7 +23,7 @@ class LoginPage(BasePage):
 
     def register_new_user(self, email, password):
         # Регистрация пользователя
-        waite_time = 5
+        waite_time = 7
         self.this_element(*LoginPageLocators.REGISTER_EMAIL_FIELD, waite_time).send_keys(email)
         self.this_element(*LoginPageLocators.REGISTER_PASSWORD_FIELD, waite_time).send_keys(password)
         self.this_element(*LoginPageLocators.REGISTER_PASSWORD_CONFIRM_FIELD, waite_time).send_keys(password)

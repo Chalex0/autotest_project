@@ -11,7 +11,7 @@ class ProductPage(BasePage):
 
     def should_be_product_url(self):
         # Проверка на корректный url
-        assert ('catalogue' in self.browser.current_url), f"'catalogue' is not present in URL {self.browser.current_url}"
+        assert ('catalogue' in self.browser.current_url), f"'catalogue' is not present in URL{self.browser.current_url}"
 
     def should_be_add_to_basket_form(self):
         # Должна быть форма для добавления в корзину
